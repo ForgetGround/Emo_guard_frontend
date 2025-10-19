@@ -59,6 +59,62 @@
       "style": {
         "navigationBarTitleText": "关于"
       }
+    },
+    {
+      "path": "pages/ai-assistant/ai-assistant",
+      "type": "page"
+    },
+    {
+      "path": "pages/cognition/cognition",
+      "type": "page"
+    },
+    {
+      "path": "pages/home/home",
+      "type": "page"
+    },
+    {
+      "path": "pages/login/consent-form",
+      "type": "page"
+    },
+    {
+      "path": "pages/login/user-info",
+      "type": "page"
+    },
+    {
+      "path": "pages/profile/profile",
+      "type": "page"
+    },
+    {
+      "path": "pages/register/register",
+      "type": "page"
+    },
+    {
+      "path": "pages/scale/adl-test",
+      "type": "page"
+    },
+    {
+      "path": "pages/scale/emotion-test",
+      "type": "page"
+    },
+    {
+      "path": "pages/scale/first-assessment",
+      "type": "page"
+    },
+    {
+      "path": "pages/scale/gad7-test",
+      "type": "page"
+    },
+    {
+      "path": "pages/scale/phq9-test",
+      "type": "page"
+    },
+    {
+      "path": "pages/scale/scd-test",
+      "type": "page"
+    },
+    {
+      "path": "pages/science/science-articles",
+      "type": "page"
     }
   ],
   "subPackages": []

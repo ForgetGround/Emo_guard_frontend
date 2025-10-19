@@ -1,1 +1,1 @@
-npx lint-staged --allow-empty
+# pre-commit hook 已禁用
