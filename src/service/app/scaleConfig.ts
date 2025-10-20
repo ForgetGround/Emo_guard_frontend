@@ -5,45 +5,35 @@ import { CustomRequestOptions } from '@/interceptors/request';
 
 import * as API from './types';
 
-/** 量表配置分页查询 GET /scale-configs */
-export async function getScaleConfigs({
+/** 获取量表配置列表 获取所有量表配置数据，支持分页和筛选 GET /scales/ */
+export async function listScaleConfigsScalesGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getScaleConfigsParams;
+  params: API.listScaleConfigsScalesGetParams;
   options?: CustomRequestOptions;
 }) {
-  return request<{
-    code?: number;
-    data?: {
-      list?: API.ScaleConfig[];
-      total?: number;
-      page?: number;
-      pageSize?: number;
-    };
-  }>('/scale-configs', {
+  return request<API.ScaleConfigResponse[]>('/scales/', {
     method: 'GET',
     params: {
-      // page has a default value: 1
-      page: '1',
-      // pageSize has a default value: 10
-      pageSize: '10',
+      // limit has a default value: 100
+      limit: '100',
       ...params,
     },
     ...(options || {}),
   });
 }
 
-/** 创建量表配置 POST /scale-configs */
-export async function postScaleConfigs({
+/** 创建量表配置 创建新的量表配置记录 POST /scales/ */
+export async function createScaleConfigScalesPost({
   body,
   options,
 }: {
-  body: API.ScaleConfig;
+  body: API.ScaleConfigCreate;
   options?: CustomRequestOptions;
 }) {
-  return request<{ code?: number; data?: API.ScaleConfig }>('/scale-configs', {
+  return request<API.ScaleConfigResponse>('/scales/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -53,41 +43,62 @@ export async function postScaleConfigs({
   });
 }
 
-/** 删除量表配置 DELETE /scale-configs */
-export async function deleteScaleConfigs({
+/** 获取量表配置详情 根据ID获取指定的量表配置详细信息 GET /scales/${param0} */
+export async function getScaleConfigScalesScaleConfigIdGet({
+  params,
+  options,
+}: {
+  // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
+  params: API.getScaleConfigScalesScaleConfigIdGetParams;
+  options?: CustomRequestOptions;
+}) {
+  const { scale_config_id: param0, ...queryParams } = params;
+
+  return request<API.ScaleConfigResponse>(`/scales/${param0}`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
+}
+
+/** 更新量表配置 更新指定的量表配置信息 PUT /scales/${param0} */
+export async function updateScaleConfigScalesScaleConfigIdPut({
+  params,
   body,
   options,
 }: {
-  body: string;
+  // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
+  params: API.updateScaleConfigScalesScaleConfigIdPutParams;
+  body: API.ScaleConfigUpdate;
   options?: CustomRequestOptions;
 }) {
-  return request<{ code?: number; msg?: string }>('/scale-configs', {
-    method: 'DELETE',
+  const { scale_config_id: param0, ...queryParams } = params;
+
+  return request<API.ScaleConfigResponse>(`/scales/${param0}`, {
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
+    params: { ...queryParams },
     data: body,
     ...(options || {}),
   });
 }
 
-/** 查询量表配置 GET /scale-configs/${param0} */
-export async function getScaleConfigsId({
+/** 删除量表配置 删除指定的量表配置记录 DELETE /scales/${param0} */
+export async function deleteScaleConfigScalesScaleConfigIdDelete({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getScaleConfigsIdParams;
+  params: API.deleteScaleConfigScalesScaleConfigIdDeleteParams;
   options?: CustomRequestOptions;
 }) {
-  const { id: param0, ...queryParams } = params;
+  const { scale_config_id: param0, ...queryParams } = params;
 
-  return request<{ code?: number; data?: API.ScaleConfig }>(
-    `/scale-configs/${param0}`,
-    {
-      method: 'GET',
-      params: { ...queryParams },
-      ...(options || {}),
-    }
-  );
+  return request<unknown>(`/scales/${param0}`, {
+    method: 'DELETE',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
 }

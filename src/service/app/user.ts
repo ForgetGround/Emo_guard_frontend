@@ -5,16 +5,16 @@ import { CustomRequestOptions } from '@/interceptors/request';
 
 import * as API from './types';
 
-/** 获取测评结果列表 获取所有测评结果，支持分页和筛选 GET /results/ */
-export async function listResultsResultsGet({
+/** 获取用户列表 获取所有用户数据，支持分页和筛选 GET /users/ */
+export async function listUsersUsersGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.listResultsResultsGetParams;
+  params: API.listUsersUsersGetParams;
   options?: CustomRequestOptions;
 }) {
-  return request<API.ScaleResultResponse[]>('/results/', {
+  return request<API.UserResponse[]>('/users/', {
     method: 'GET',
     params: {
       // limit has a default value: 100
@@ -25,15 +25,15 @@ export async function listResultsResultsGet({
   });
 }
 
-/** 创建测评结果 创建新的测评结果记录 POST /results/ */
-export async function createResultResultsPost({
+/** 创建用户 创建新的用户记录 POST /users/ */
+export async function createUserUsersPost({
   body,
   options,
 }: {
-  body: API.ScaleResultCreate;
+  body: API.UserCreate;
   options?: CustomRequestOptions;
 }) {
-  return request<API.ScaleResultResponse>('/results/', {
+  return request<API.UserResponse>('/users/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -43,38 +43,38 @@ export async function createResultResultsPost({
   });
 }
 
-/** 获取测评结果详情 根据ID获取指定的测评结果详细信息 GET /results/${param0} */
-export async function getResultResultsResultIdGet({
+/** 获取用户详情 根据ID获取指定的用户详细信息 GET /users/${param0} */
+export async function getUserUsersUserIdGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getResultResultsResultIdGetParams;
+  params: API.getUserUsersUserIdGetParams;
   options?: CustomRequestOptions;
 }) {
-  const { result_id: param0, ...queryParams } = params;
+  const { user_id: param0, ...queryParams } = params;
 
-  return request<API.ScaleResultResponse>(`/results/${param0}`, {
+  return request<API.UserResponse>(`/users/${param0}`, {
     method: 'GET',
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 更新测评结果 更新指定的测评结果信息 PUT /results/${param0} */
-export async function updateResultResultsResultIdPut({
+/** 更新用户 更新指定的用户信息 PUT /users/${param0} */
+export async function updateUserUsersUserIdPut({
   params,
   body,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.updateResultResultsResultIdPutParams;
-  body: API.ScaleResultUpdate;
+  params: API.updateUserUsersUserIdPutParams;
+  body: API.UserUpdate;
   options?: CustomRequestOptions;
 }) {
-  const { result_id: param0, ...queryParams } = params;
+  const { user_id: param0, ...queryParams } = params;
 
-  return request<API.ScaleResultResponse>(`/results/${param0}`, {
+  return request<API.UserResponse>(`/users/${param0}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -85,18 +85,18 @@ export async function updateResultResultsResultIdPut({
   });
 }
 
-/** 删除测评结果 删除指定的测评结果记录 DELETE /results/${param0} */
-export async function deleteResultResultsResultIdDelete({
+/** 删除用户 删除指定的用户记录 DELETE /users/${param0} */
+export async function deleteUserUsersUserIdDelete({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.deleteResultResultsResultIdDeleteParams;
+  params: API.deleteUserUsersUserIdDeleteParams;
   options?: CustomRequestOptions;
 }) {
-  const { result_id: param0, ...queryParams } = params;
+  const { user_id: param0, ...queryParams } = params;
 
-  return request<unknown>(`/results/${param0}`, {
+  return request<unknown>(`/users/${param0}`, {
     method: 'DELETE',
     params: { ...queryParams },
     ...(options || {}),

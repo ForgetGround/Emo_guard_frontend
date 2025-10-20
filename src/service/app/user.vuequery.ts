@@ -5,33 +5,33 @@ import type { DefaultError } from '@tanstack/vue-query';
 import request from '@/utils/request';
 import { CustomRequestOptions } from '@/interceptors/request';
 
-import * as apis from './article';
+import * as apis from './user';
 import * as API from './types';
 
-/** 获取文章列表 获取所有文章数据，支持分页和筛选 GET /articles/ */
-export function listArticlesArticlesGetQueryOptions(options: {
+/** 获取用户列表 获取所有用户数据，支持分页和筛选 GET /users/ */
+export function listUsersUsersGetQueryOptions(options: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.listArticlesArticlesGetParams;
+  params: API.listUsersUsersGetParams;
   options?: CustomRequestOptions;
 }) {
   return queryOptions({
     queryFn: async ({ queryKey }) => {
-      return apis.listArticlesArticlesGet(queryKey[1] as typeof options);
+      return apis.listUsersUsersGet(queryKey[1] as typeof options);
     },
-    queryKey: ['listArticlesArticlesGet', options],
+    queryKey: ['listUsersUsersGet', options],
   });
 }
 
-/** 创建文章 创建新的文章记录 POST /articles/ */
-export function useCreateArticleArticlesPostMutation(options?: {
-  onSuccess?: (value?: API.ArticleResponse) => void;
+/** 创建用户 创建新的用户记录 POST /users/ */
+export function useCreateUserUsersPostMutation(options?: {
+  onSuccess?: (value?: API.UserResponse) => void;
   onError?: (error?: DefaultError) => void;
 }) {
   const { onSuccess, onError } = options || {};
 
   const response = useMutation({
-    mutationFn: apis.createArticleArticlesPost,
-    onSuccess(data: API.ArticleResponse) {
+    mutationFn: apis.createUserUsersPost,
+    onSuccess(data: API.UserResponse) {
       onSuccess?.(data);
     },
     onError(error) {
@@ -42,30 +42,30 @@ export function useCreateArticleArticlesPostMutation(options?: {
   return response;
 }
 
-/** 获取文章详情 根据ID获取指定的文章详细信息 GET /articles/${param0} */
-export function getArticleArticlesArticleIdGetQueryOptions(options: {
+/** 获取用户详情 根据ID获取指定的用户详细信息 GET /users/${param0} */
+export function getUserUsersUserIdGetQueryOptions(options: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getArticleArticlesArticleIdGetParams;
+  params: API.getUserUsersUserIdGetParams;
   options?: CustomRequestOptions;
 }) {
   return queryOptions({
     queryFn: async ({ queryKey }) => {
-      return apis.getArticleArticlesArticleIdGet(queryKey[1] as typeof options);
+      return apis.getUserUsersUserIdGet(queryKey[1] as typeof options);
     },
-    queryKey: ['getArticleArticlesArticleIdGet', options],
+    queryKey: ['getUserUsersUserIdGet', options],
   });
 }
 
-/** 更新文章 更新指定的文章信息 PUT /articles/${param0} */
-export function useUpdateArticleArticlesArticleIdPutMutation(options?: {
-  onSuccess?: (value?: API.ArticleResponse) => void;
+/** 更新用户 更新指定的用户信息 PUT /users/${param0} */
+export function useUpdateUserUsersUserIdPutMutation(options?: {
+  onSuccess?: (value?: API.UserResponse) => void;
   onError?: (error?: DefaultError) => void;
 }) {
   const { onSuccess, onError } = options || {};
 
   const response = useMutation({
-    mutationFn: apis.updateArticleArticlesArticleIdPut,
-    onSuccess(data: API.ArticleResponse) {
+    mutationFn: apis.updateUserUsersUserIdPut,
+    onSuccess(data: API.UserResponse) {
       onSuccess?.(data);
     },
     onError(error) {
@@ -76,15 +76,15 @@ export function useUpdateArticleArticlesArticleIdPutMutation(options?: {
   return response;
 }
 
-/** 删除文章 删除指定的文章记录 DELETE /articles/${param0} */
-export function useDeleteArticleArticlesArticleIdDeleteMutation(options?: {
+/** 删除用户 删除指定的用户记录 DELETE /users/${param0} */
+export function useDeleteUserUsersUserIdDeleteMutation(options?: {
   onSuccess?: (value?: unknown) => void;
   onError?: (error?: DefaultError) => void;
 }) {
   const { onSuccess, onError } = options || {};
 
   const response = useMutation({
-    mutationFn: apis.deleteArticleArticlesArticleIdDelete,
+    mutationFn: apis.deleteUserUsersUserIdDelete,
     onSuccess(data: unknown) {
       onSuccess?.(data);
     },

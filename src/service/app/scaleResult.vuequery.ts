@@ -8,44 +8,30 @@ import { CustomRequestOptions } from '@/interceptors/request';
 import * as apis from './scaleResult';
 import * as API from './types';
 
-/** 量表结果分页查询 GET /api/scale_results */
-export function getApiScaleResultsQueryOptions(options: {
+/** 获取测评结果列表 获取所有测评结果，支持分页和筛选 GET /results/ */
+export function listResultsResultsGetQueryOptions(options: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getApiScaleResultsParams;
+  params: API.listResultsResultsGetParams;
   options?: CustomRequestOptions;
 }) {
   return queryOptions({
     queryFn: async ({ queryKey }) => {
-      return apis.getApiScaleResults(queryKey[1] as typeof options);
+      return apis.listResultsResultsGet(queryKey[1] as typeof options);
     },
-    queryKey: ['getApiScaleResults', options],
+    queryKey: ['listResultsResultsGet', options],
   });
 }
 
-/** 查询量表结果 GET /api/scale_results/${param0} */
-export function getApiScaleResultsIdQueryOptions(options: {
-  // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getApiScaleResultsIdParams;
-  options?: CustomRequestOptions;
-}) {
-  return queryOptions({
-    queryFn: async ({ queryKey }) => {
-      return apis.getApiScaleResultsId(queryKey[1] as typeof options);
-    },
-    queryKey: ['getApiScaleResultsId', options],
-  });
-}
-
-/** 删除量表结果 DELETE /api/scale_results/${param0} */
-export function useDeleteApiScaleResultsIdMutation(options?: {
-  onSuccess?: (value?: { code?: number; msg?: string }) => void;
+/** 创建测评结果 创建新的测评结果记录 POST /results/ */
+export function useCreateResultResultsPostMutation(options?: {
+  onSuccess?: (value?: API.ScaleResultResponse) => void;
   onError?: (error?: DefaultError) => void;
 }) {
   const { onSuccess, onError } = options || {};
 
   const response = useMutation({
-    mutationFn: apis.deleteApiScaleResultsId,
-    onSuccess(data: { code?: number; msg?: string }) {
+    mutationFn: apis.createResultResultsPost,
+    onSuccess(data: API.ScaleResultResponse) {
       onSuccess?.(data);
     },
     onError(error) {
@@ -56,32 +42,50 @@ export function useDeleteApiScaleResultsIdMutation(options?: {
   return response;
 }
 
-/** 量表结果导出 GET /api/scale_results/export */
-export function getApiScaleResultsOpenApiExportQueryOptions(options: {
+/** 获取测评结果详情 根据ID获取指定的测评结果详细信息 GET /results/${param0} */
+export function getResultResultsResultIdGetQueryOptions(options: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getApiScaleResults_openAPI_exportParams;
+  params: API.getResultResultsResultIdGetParams;
   options?: CustomRequestOptions;
 }) {
   return queryOptions({
     queryFn: async ({ queryKey }) => {
-      return apis.getApiScaleResultsOpenApiExport(
-        queryKey[1] as typeof options
-      );
+      return apis.getResultResultsResultIdGet(queryKey[1] as typeof options);
     },
-    queryKey: ['getApiScaleResultsOpenApiExport', options],
+    queryKey: ['getResultResultsResultIdGet', options],
   });
 }
 
-/** 创建量表结果 POST /scale-results */
-export function usePostScaleResultsMutation(options?: {
-  onSuccess?: (value?: { code?: number; data?: API.ScaleResult }) => void;
+/** 更新测评结果 更新指定的测评结果信息 PUT /results/${param0} */
+export function useUpdateResultResultsResultIdPutMutation(options?: {
+  onSuccess?: (value?: API.ScaleResultResponse) => void;
   onError?: (error?: DefaultError) => void;
 }) {
   const { onSuccess, onError } = options || {};
 
   const response = useMutation({
-    mutationFn: apis.postScaleResults,
-    onSuccess(data: { code?: number; data?: API.ScaleResult }) {
+    mutationFn: apis.updateResultResultsResultIdPut,
+    onSuccess(data: API.ScaleResultResponse) {
+      onSuccess?.(data);
+    },
+    onError(error) {
+      onError?.(error);
+    },
+  });
+
+  return response;
+}
+
+/** 删除测评结果 删除指定的测评结果记录 DELETE /results/${param0} */
+export function useDeleteResultResultsResultIdDeleteMutation(options?: {
+  onSuccess?: (value?: unknown) => void;
+  onError?: (error?: DefaultError) => void;
+}) {
+  const { onSuccess, onError } = options || {};
+
+  const response = useMutation({
+    mutationFn: apis.deleteResultResultsResultIdDelete,
+    onSuccess(data: unknown) {
       onSuccess?.(data);
     },
     onError(error) {
