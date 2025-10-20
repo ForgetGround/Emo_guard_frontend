@@ -29,29 +29,24 @@ export const tabbarList = [
   {
     iconPath: 'static/tabbar/example.png',
     selectedIconPath: 'static/tabbar/exampleHL.png',
-    pagePath: 'pages/about/about',
-    text: '关于',
-    icon: 'i-carbon-code',
-    // 注意 unocss 的图标需要在 页面上引入一下，或者配置到 unocss.config.ts 的 safelist 中
-    iconType: 'unocss',
+    pagePath: 'pages/mood/record',
+    text: '情绪记录',
+    icon: 'edit',
+    iconType: 'uiLib',
   },
-  // {
-  //   pagePath: 'pages/my/index',
-  //   text: '我的',
-  //   icon: '/static/logo.svg',
-  //   iconType: 'local',
-  // },
-  // {
-  //   pagePath: 'pages/mine/index',
-  //   text: '我的',
-  //   icon: 'iconfont icon-my',
-  //   iconType: 'iconfont',
-  // },
+  {
+    iconPath: 'static/tabbar/personal.png',
+    selectedIconPath: 'static/tabbar/personalHL.png',
+    pagePath: 'pages/profile/index',
+    text: '我的',
+    icon: 'user',
+    iconType: 'uiLib',
+  },
 ]
 
 const _tabbar = {
   color: '#999999',
-  selectedColor: '#018d71',
+  selectedColor: '#667eea',
   backgroundColor: '#F8F8F8',
   borderStyle: 'black',
   height: '50px',
