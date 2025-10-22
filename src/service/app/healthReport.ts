@@ -27,16 +27,22 @@ export async function listHealthReportsHealthReportsGet({
 
 /** 创建健康报告 创建新的健康报告记录 POST /health-reports/ */
 export async function createHealthReportHealthReportsPost({
+  params,
   body,
   options,
 }: {
-  body: API.HealthReportCreate;
+  // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
+  params: API.createHealthReportHealthReportsPostParams;
+  body: API.HealthReportCreateRequest;
   options?: CustomRequestOptions;
 }) {
   return request<API.HealthReportResponse>('/health-reports/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+    },
+    params: {
+      ...params,
     },
     data: body,
     ...(options || {}),
@@ -56,7 +62,9 @@ export async function getHealthReportHealthReportsHealthReportIdGet({
 
   return request<API.HealthReportResponse>(`/health-reports/${param0}`, {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }
@@ -69,7 +77,7 @@ export async function updateHealthReportHealthReportsHealthReportIdPut({
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
   params: API.updateHealthReportHealthReportsHealthReportIdPutParams;
-  body: API.HealthReportUpdate;
+  body: API.HealthReportUpdateRequest;
   options?: CustomRequestOptions;
 }) {
   const { health_report_id: param0, ...queryParams } = params;
@@ -79,7 +87,9 @@ export async function updateHealthReportHealthReportsHealthReportIdPut({
     headers: {
       'Content-Type': 'application/json',
     },
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     data: body,
     ...(options || {}),
   });
@@ -98,7 +108,9 @@ export async function deleteHealthReportHealthReportsHealthReportIdDelete({
 
   return request<unknown>(`/health-reports/${param0}`, {
     method: 'DELETE',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }

@@ -30,7 +30,7 @@ export async function createScaleConfigScalesPost({
   body,
   options,
 }: {
-  body: API.ScaleConfigCreate;
+  body: API.ScaleConfigCreateRequest;
   options?: CustomRequestOptions;
 }) {
   return request<API.ScaleConfigResponse>('/scales/', {
@@ -56,7 +56,9 @@ export async function getScaleConfigScalesScaleConfigIdGet({
 
   return request<API.ScaleConfigResponse>(`/scales/${param0}`, {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }
@@ -69,7 +71,7 @@ export async function updateScaleConfigScalesScaleConfigIdPut({
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
   params: API.updateScaleConfigScalesScaleConfigIdPutParams;
-  body: API.ScaleConfigUpdate;
+  body: API.ScaleConfigUpdateRequest;
   options?: CustomRequestOptions;
 }) {
   const { scale_config_id: param0, ...queryParams } = params;

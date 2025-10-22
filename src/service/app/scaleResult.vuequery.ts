@@ -78,14 +78,14 @@ export function useUpdateResultResultsResultIdPutMutation(options?: {
 
 /** 删除测评结果 删除指定的测评结果记录 DELETE /results/${param0} */
 export function useDeleteResultResultsResultIdDeleteMutation(options?: {
-  onSuccess?: (value?: unknown) => void;
+  onSuccess?: (value?: API.ScaleResultDeleteResponse) => void;
   onError?: (error?: DefaultError) => void;
 }) {
   const { onSuccess, onError } = options || {};
 
   const response = useMutation({
     mutationFn: apis.deleteResultResultsResultIdDelete,
-    onSuccess(data: unknown) {
+    onSuccess(data: API.ScaleResultDeleteResponse) {
       onSuccess?.(data);
     },
     onError(error) {

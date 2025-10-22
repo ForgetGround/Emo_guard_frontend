@@ -27,9 +27,12 @@ export async function listResultsResultsGet({
 
 /** 创建测评结果 创建新的测评结果记录 POST /results/ */
 export async function createResultResultsPost({
+  params,
   body,
   options,
 }: {
+  // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
+  params: API.createResultResultsPostParams;
   body: API.ScaleResultCreate;
   options?: CustomRequestOptions;
 }) {
@@ -37,6 +40,9 @@ export async function createResultResultsPost({
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+    },
+    params: {
+      ...params,
     },
     data: body,
     ...(options || {}),
@@ -56,7 +62,9 @@ export async function getResultResultsResultIdGet({
 
   return request<API.ScaleResultResponse>(`/results/${param0}`, {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }
@@ -79,7 +87,9 @@ export async function updateResultResultsResultIdPut({
     headers: {
       'Content-Type': 'application/json',
     },
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     data: body,
     ...(options || {}),
   });
@@ -96,9 +106,11 @@ export async function deleteResultResultsResultIdDelete({
 }) {
   const { result_id: param0, ...queryParams } = params;
 
-  return request<unknown>(`/results/${param0}`, {
+  return request<API.ScaleResultDeleteResponse>(`/results/${param0}`, {
     method: 'DELETE',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }

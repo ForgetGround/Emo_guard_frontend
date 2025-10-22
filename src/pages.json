@@ -6,14 +6,6 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#FFFFFF"
   },
-  "easycom": {
-    "autoscan": true,
-    "custom": {
-      "^fg-(.*)": "@/components/fg-$1/fg-$1.vue",
-      "^wd-(.*)": "wot-design-uni/components/wd-$1/wd-$1.vue",
-      "^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue"
-    }
-  },
   "tabBar": {
     "color": "#999999",
     "selectedColor": "#667eea",
@@ -92,6 +84,25 @@
       }
     },
     {
+      "path": "pages/auth/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "登录/注册"
+      }
+    },
+    {
+      "path": "pages/contact/index",
+      "type": "page",
+      "layout": "default",
+      "style": {
+        "navigationBarTitleText": "联系我们"
+      }
+    },
+    {
+      "path": "pages/customer/index",
+      "type": "page"
+    },
+    {
       "path": "pages/login/index",
       "type": "page",
       "layout": "tabbar",
@@ -113,13 +124,6 @@
       "layout": "tabbar",
       "style": {
         "navigationBarTitleText": "我的"
-      }
-    },
-    {
-      "path": "pages/register/index",
-      "type": "page",
-      "style": {
-        "navigationBarTitleText": "注册"
       }
     },
     {

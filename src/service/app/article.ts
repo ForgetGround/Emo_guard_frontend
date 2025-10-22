@@ -30,7 +30,7 @@ export async function createArticleArticlesPost({
   body,
   options,
 }: {
-  body: API.ArticleCreate;
+  body: API.ArticleCreateRequest;
   options?: CustomRequestOptions;
 }) {
   return request<API.ArticleResponse>('/articles/', {
@@ -56,7 +56,9 @@ export async function getArticleArticlesArticleIdGet({
 
   return request<API.ArticleResponse>(`/articles/${param0}`, {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }
@@ -69,7 +71,7 @@ export async function updateArticleArticlesArticleIdPut({
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
   params: API.updateArticleArticlesArticleIdPutParams;
-  body: API.ArticleUpdate;
+  body: API.ArticleUpdateRequest;
   options?: CustomRequestOptions;
 }) {
   const { article_id: param0, ...queryParams } = params;

@@ -2,6 +2,7 @@ import path from 'node:path'
 import process from 'node:process'
 import Uni from '@dcloudio/vite-plugin-uni'
 import Components from '@uni-helper/vite-plugin-uni-components'
+import { WotResolver } from '@uni-helper/vite-plugin-uni-components/resolvers'
 // @see https://uni-helper.js.org/vite-plugin-uni-layouts
 import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 // @see https://github.com/uni-helper/vite-plugin-uni-manifest
@@ -57,6 +58,9 @@ export default async ({ command, mode }) => {
     envDir: './env', // 自定义env目录
 
     plugins: [
+      Components({
+        resolvers: [WotResolver()]
+      }),
       UniPages({
         exclude: ['**/components/**/**.*'],
         routeBlockLang: 'json5', // 虽然设了默认值，但是vue文件还是要加上 lang="json5", 这样才能很好地格式化
@@ -75,7 +79,7 @@ export default async ({ command, mode }) => {
         // 自定义插件禁用 vite:vue 插件的 devToolsEnabled，强制编译 vue 模板时 inline 为 true
         name: 'fix-vite-plugin-vue',
         configResolved(config) {
-          const plugin = config.plugins.find(p => p.name === 'vite:vue')
+          const plugin = config.plugins.find((p) => p.name === 'vite:vue')
           if (plugin && plugin.api && plugin.api.options) {
             plugin.api.options.devToolsEnabled = false
           }
@@ -91,7 +95,7 @@ export default async ({ command, mode }) => {
       // Optimization 插件需要 page.json 文件，故应在 UniPages 插件之后执行
       Optimization({
         enable: {
-          'optimization': true,
+          optimization: true,
           'async-import': true,
           'async-component': true,
         },
@@ -113,14 +117,14 @@ export default async ({ command, mode }) => {
         },
       },
       // 打包分析插件，h5 + 生产环境才弹出
-      UNI_PLATFORM === 'h5'
-      && mode === 'production'
-      && visualizer({
-        filename: './node_modules/.cache/visualizer/stats.html',
-        open: true,
-        gzipSize: true,
-        brotliSize: true,
-      }),
+      UNI_PLATFORM === 'h5' &&
+        mode === 'production' &&
+        visualizer({
+          filename: './node_modules/.cache/visualizer/stats.html',
+          open: true,
+          gzipSize: true,
+          brotliSize: true,
+        }),
       // 只有在 app 平台时才启用 copyNativeRes 插件
       // UNI_PLATFORM === 'app' && copyNativeRes(),
       Components({
@@ -163,7 +167,7 @@ export default async ({ command, mode }) => {
             [VITE_APP_PROXY_PREFIX]: {
               target: VITE_SERVER_BASEURL,
               changeOrigin: true,
-              rewrite: path => path.replace(new RegExp(`^${VITE_APP_PROXY_PREFIX}`), ''),
+              rewrite: (path) => path.replace(new RegExp(`^${VITE_APP_PROXY_PREFIX}`), ''),
             },
           }
         : undefined,

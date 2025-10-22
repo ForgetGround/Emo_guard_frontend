@@ -51,11 +51,16 @@ const httpInterceptor = {
       platform, // 可选，与 uniapp 定义的平台一致，告诉后台来源
       ...options.header,
     }
+// 无需鉴权路由白名单
+const noAuthList = [
+  '/api/public/xxx', // 示例：无需鉴权的接口路径
+  // 可继续补充
+];
     // 3. 添加 token 请求头标识
     const userStore = useUserStore()
     const { token } = userStore.userInfo as unknown as IUserInfo
-    if (token) {
-      options.header.Authorization = `Bearer ${token}`
+    if (!noAuthList.some(path => options.url.includes(path)) && token) {
+      options.header.Authorization = `Bearer ${token}`;
     }
   },
 }

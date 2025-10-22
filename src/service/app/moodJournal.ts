@@ -27,16 +27,22 @@ export async function listMoodJournalsMoodJournalsGet({
 
 /** 创建心情日记 创建新的心情日记记录 POST /mood-journals/ */
 export async function createMoodJournalMoodJournalsPost({
+  params,
   body,
   options,
 }: {
-  body: API.MoodJournalCreate;
+  // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
+  params: API.createMoodJournalMoodJournalsPostParams;
+  body: API.MoodJournalCreateRequest;
   options?: CustomRequestOptions;
 }) {
   return request<API.MoodJournalResponse>('/mood-journals/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+    },
+    params: {
+      ...params,
     },
     data: body,
     ...(options || {}),
@@ -56,7 +62,9 @@ export async function getMoodJournalMoodJournalsMoodJournalIdGet({
 
   return request<API.MoodJournalResponse>(`/mood-journals/${param0}`, {
     method: 'GET',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }
@@ -69,7 +77,7 @@ export async function updateMoodJournalMoodJournalsMoodJournalIdPut({
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
   params: API.updateMoodJournalMoodJournalsMoodJournalIdPutParams;
-  body: API.MoodJournalUpdate;
+  body: API.MoodJournalUpdateRequest;
   options?: CustomRequestOptions;
 }) {
   const { mood_journal_id: param0, ...queryParams } = params;
@@ -79,7 +87,9 @@ export async function updateMoodJournalMoodJournalsMoodJournalIdPut({
     headers: {
       'Content-Type': 'application/json',
     },
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     data: body,
     ...(options || {}),
   });
@@ -98,7 +108,9 @@ export async function deleteMoodJournalMoodJournalsMoodJournalIdDelete({
 
   return request<unknown>(`/mood-journals/${param0}`, {
     method: 'DELETE',
-    params: { ...queryParams },
+    params: {
+      ...queryParams,
+    },
     ...(options || {}),
   });
 }
