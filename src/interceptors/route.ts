@@ -8,20 +8,24 @@ import { useUserStore } from '@/store'
 import { needLoginPages as _needLoginPages, getLastPage, getNeedLoginPages } from '@/utils'
 
 // TODO Check
-const loginRoute = '/pages/auth/index'
+const loginRoute = import.meta.env.VITE_LOGIN_URL
 
 function isLogined() {
   const userStore = useUserStore()
-  return !!userStore.userInfo.access_token
+  return userStore.isLogined
 }
 
 const isDev = import.meta.env.DEV
 
 // 黑名单登录拦截器 - （适用于大部分页面不需要登录，少部分页面需要登录）
 const navigateToInterceptor = {
-  // 黑名单路由拦截，未登录跳转登录页并携带 redirect 参数
+  // 注意，这里的url是 '/' 开头的，如 '/pages/index/index'，跟 'pages.json' 里面的 path 不同
+  // 增加对相对路径的处理，BY 网友 @ideal
   invoke({ url }: { url: string }) {
+    // console.log(url) // /pages/route-interceptor/index?name=feige&age=30
     let path = url.split('?')[0]
+
+    // 处理相对路径
     if (!path.startsWith('/')) {
       const currentPath = getLastPage().route
       const normalizedCurrentPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`
@@ -29,6 +33,21 @@ const navigateToInterceptor = {
       path = `${baseDir}/${path}`
     }
 
+    let needLoginPages: string[] = []
+    // 为了防止开发时出现BUG，这里每次都获取一下。生产环境可以移到函数外，性能更好
+    if (isDev) {
+      needLoginPages = getNeedLoginPages()
+    } else {
+      needLoginPages = _needLoginPages
+    }
+    const isNeedLogin = needLoginPages.includes(path)
+    if (!isNeedLogin) {
+      return true
+    }
+    const hasLogin = isLogined()
+    if (hasLogin) {
+      return true
+    }
     const redirectRoute = `${loginRoute}?redirect=${encodeURIComponent(url)}`
     uni.navigateTo({ url: redirectRoute })
     return false
@@ -43,3 +62,4 @@ export const routeInterceptor = {
     uni.addInterceptor('switchTab', navigateToInterceptor)
   },
 }
+

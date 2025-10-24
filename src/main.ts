@@ -16,7 +16,6 @@ export function createApp() {
   app.use(prototypeInterceptor)
   app.use(VueQueryPlugin)
 
-
   return {
     app,
   }

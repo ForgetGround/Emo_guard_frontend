@@ -138,15 +138,15 @@ async function handleWechatLogin() {
 </script>
 
 <template>
-  <view class="auth-container">
-    <view class="mode-switch">
+  <div class="auth-container">
+    <div class="mode-switch">
       <wot-button :type="mode === 'login' ? 'primary' : 'default'" @click="mode = 'login'">
         登录
       </wot-button>
       <wot-button :type="mode === 'register' ? 'primary' : 'default'" @click="mode = 'register'">
         注册
       </wot-button>
-    </view>
+    </div>
     <wot-form>
       <template v-if="mode === 'login'">
         <wot-input v-model="form.username" label="账号" required />
@@ -172,7 +172,7 @@ async function handleWechatLogin() {
         </wot-button>
       </template>
     </wot-form>
-  </view>
+  </div>
 </template>
 
 <style lang="scss" scoped>

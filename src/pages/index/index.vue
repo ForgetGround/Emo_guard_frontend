@@ -17,39 +17,54 @@ import { listHealthReportsHealthReportsGetQueryOptions } from '@/service/app/hea
 const { data: reports, isLoading: loadingReports } = useQuery(
   listHealthReportsHealthReportsGetQueryOptions({ params: {} }),
 )
+function goAssessment() {
+  uni.navigateTo({ url: '/pages/assessment/index' })
+}
+function goArticles() {
+  uni.navigateTo({ url: '/pages/articles/index' })
+}
+function goMoodRecord() {
+  uni.navigateTo({ url: '/pages/mood/record' })
+}
 </script>
 
 <template>
   <wot-page>
     <wd-navbar title="情绪守护" />
-    <wd-card title="功能导航">
-      <template #desc>
-        <wd-button-group block gap="24rpx">
-          <wd-button type="primary" @click="$router.push('/pages/assessment/index')">
-            心理自评
-          </wd-button>
-          <wd-button type="success" @click="$router.push('/pages/articles/index')">
-            科普文章
-          </wd-button>
-          <wd-button type="warning" @click="$router.push('/pages/mood/record')">量表记录</wd-button>
-        </wd-button-group>
-      </template>
-    </wd-card>
-    <wd-card title="健康报告">
-      <template #desc>
-        <wot-loading v-if="loadingReports" />
-        <wot-empty v-else-if="!reports || reports.length === 0" description="暂无健康报告" />
-        <wd-list v-else>
-          <wd-list-item
-            v-for="report in reports"
-            :key="report.id"
-            :title="report.report_type"
-            :desc="`风险: ${report.overall_risk || '无风险信息'}`"
-            :extra="report.created_at"
-          />
-        </wd-list>
-      </template>
-    </wd-card>
+    <div class="main-content">
+      <wd-card title="功能导航">
+        <template #desc>
+          <div class="button-group">
+            <wd-button type="primary" @click="goAssessment">
+              心理自评
+            </wd-button>
+            <wd-button type="success" @click="goArticles">
+              科普文章
+            </wd-button>
+            <wd-button type="warning" @click="goMoodRecord">量表记录</wd-button>
+          </div>
+        </template>
+      </wd-card>
+      <wd-card title="健康报告">
+        <template #desc>
+          <wot-loading v-if="loadingReports" />
+          <wot-empty v-else-if="!reports || reports.length === 0" description="暂无健康报告" />
+          <div v-else>
+            <div
+              v-for="report in reports"
+              :key="report.id"
+              style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+            >
+              <div style="font-weight: bold">
+                {{ report.report_type }}
+              </div>
+              <div>风险: {{ report.overall_risk || '无风险信息' }}</div>
+              <div>{{ report.created_at }}</div>
+            </div>
+          </div>
+        </template>
+      </wd-card>
+    </div>
   </wot-page>
 </template>
 
@@ -63,5 +78,9 @@ const { data: reports, isLoading: loadingReports } = useQuery(
   display: flex;
   flex-direction: column;
   gap: 32rpx;
+}
+.button-group {
+  display: flex;
+  gap: 24rpx;
 }
 </style>

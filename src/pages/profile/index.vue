@@ -29,62 +29,87 @@ onShow(() => {
     <wd-card title="个人档案">
       <template #desc>
         <wot-loading v-if="isLoading" />
-        <wd-list v-else>
-          <wd-list-item title="昵称" :desc="profile?.nickname" />
-          <wd-list-item title="真实姓名" :desc="profile?.real_name" />
-          <wd-list-item
-            title="性别"
-            :desc="profile?.gender === 1 ? '男' : profile?.gender === 2 ? '女' : '未知'"
-          />
-          <wd-list-item title="出生日期" :desc="profile?.birth_date ?? '未填写'" />
-          <wd-list-item title="职业" :desc="profile?.occupation ?? '未填写'" />
-          <wd-list-item title="学历" :desc="profile?.education ?? '未填写'" />
-          <wd-list-item title="婚姻状况" :desc="profile?.marital_status ?? '未填写'" />
-          <wd-list-item title="手机" :desc="profile?.mobile ?? '未填写'" />
-          <wd-list-item
-            title="身高"
-            :desc="profile?.height ? `${profile.height}cm` : '未填写'"
-          />
-          <wd-list-item
-            title="体重"
-            :desc="profile?.weight ? `${profile.weight}kg` : '未填写'"
-          />
-          <wd-list-item title="所在地" :desc="profile?.location ?? '未填写'" />
-          <wd-list-item
-            title="慢性病"
-            :desc="profile?.chronic_diseases?.length ? profile.chronic_diseases.join(', ') : '无'"
-          />
-          <wd-list-item title="吸烟" :desc="profile?.smoking ? '是' : '否'" />
-          <wd-list-item title="饮酒" :desc="profile?.drinking ? '是' : '否'" />
-        </wd-list>
+        <div v-else>
+          <div
+            v-for="item in [
+              { title: '昵称', desc: profile?.nickname },
+              { title: '真实姓名', desc: profile?.real_name },
+              { title: '性别', desc: profile?.gender === 1 ? '男' : profile?.gender === 2 ? '女' : '未知' },
+              { title: '出生日期', desc: profile?.birth_date ?? '未填写' },
+              { title: '职业', desc: profile?.occupation ?? '未填写' },
+              { title: '学历', desc: profile?.education ?? '未填写' },
+              { title: '婚姻状况', desc: profile?.marital_status ?? '未填写' },
+              { title: '手机', desc: profile?.mobile ?? '未填写' },
+              { title: '身高', desc: profile?.height ? `${profile.height}cm` : '未填写' },
+              { title: '体重', desc: profile?.weight ? `${profile.weight}kg` : '未填写' },
+              { title: '所在地', desc: profile?.location ?? '未填写' },
+              { title: '慢性病', desc: profile?.chronic_diseases?.length ? profile.chronic_diseases.join(', ') : '无' },
+              { title: '吸烟', desc: profile?.smoking ? '是' : '否' },
+              { title: '饮酒', desc: profile?.drinking ? '是' : '否' }
+            ]"
+            :key="item.title"
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">{{ item.title }}</div>
+            <div>{{ item.desc }}</div>
+          </div>
+        </div>
       </template>
     </wd-card>
     <wd-card title="系统消息">
       <template #desc>
-        <wd-list>
-          <wd-list-item title="暂无消息" desc="" />
-        </wd-list>
+        <div>
+          <div
+            v-for="item in [{ title: '暂无消息', desc: '' }]"
+            :key="item.title"
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">{{ item.title }}</div>
+            <div>{{ item.desc }}</div>
+          </div>
+        </div>
       </template>
     </wd-card>
     <wd-card title="意见反馈">
       <template #desc>
-        <wd-list>
-          <wd-list-item title="提交反馈" desc="" />
-        </wd-list>
+        <div>
+          <div
+            v-for="item in [{ title: '提交反馈', desc: '' }]"
+            :key="item.title"
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">{{ item.title }}</div>
+            <div>{{ item.desc }}</div>
+          </div>
+        </div>
       </template>
     </wd-card>
     <wd-card title="设置">
       <template #desc>
-        <wd-list>
-          <wd-list-item title="通用设置" desc="" />
-        </wd-list>
+        <div>
+          <div
+            v-for="item in [{ title: '通用设置', desc: '' }]"
+            :key="item.title"
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">{{ item.title }}</div>
+            <div>{{ item.desc }}</div>
+          </div>
+        </div>
       </template>
     </wd-card>
     <wd-card title="账号安全">
       <template #desc>
-        <wd-list>
-          <wd-list-item title="修改密码" desc="" />
-        </wd-list>
+        <div>
+          <div
+            v-for="item in [{ title: '修改密码', desc: '' }]"
+            :key="item.title"
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">{{ item.title }}</div>
+            <div>{{ item.desc }}</div>
+          </div>
+        </div>
       </template>
     </wd-card>
   </wot-page>

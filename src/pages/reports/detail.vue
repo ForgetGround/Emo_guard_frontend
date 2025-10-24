@@ -24,37 +24,46 @@ const { data: report, isLoading } = useQuery(
 </script>
 
 <template>
-  <view>
+  <div>
     <w-navbar title="报告详情" />
     <w-card title="基本信息">
       <template #desc>
-        <view v-if="isLoading">加载中...</view>
-        <view v-else-if="report">
-          <w-list>
-            <w-list-item title="报告类型" :desc="report.report_type" />
-            <w-list-item title="总体风险" :desc="report.overall_risk || '未知'" />
-            <w-list-item title="创建时间" :desc="report.created_at" />
-            <w-list-item title="摘要" :desc="report.summary || ''" />
-          </w-list>
-        </view>
-        <view v-else>未找到报告</view>
+        <div v-if="isLoading">加载中...</div>
+        <div v-else-if="report">
+          <div>
+             <div
+               v-for="item in [
+                 { title: '报告类型', desc: report.report_type },
+                 { title: '总体风险', desc: report.overall_risk || '未知' },
+                 { title: '创建时间', desc: report.created_at },
+                 { title: '摘要', desc: report.summary || '' }
+               ]"
+               :key="item.title"
+               style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+             >
+               <div style="font-weight: bold">{{ item.title }}</div>
+               <div>{{ item.desc }}</div>
+             </div>
+          </div>
+        </div>
+        <div v-else>未找到报告</div>
       </template>
     </w-card>
     <w-card title="专业建议">
       <template #desc>
-        <view v-if="report?.professional_advice">
+        <div v-if="report?.professional_advice">
           {{ report.professional_advice }}
-        </view>
-        <view v-else>暂无建议</view>
+        </div>
+        <div v-else>暂无建议</div>
       </template>
     </w-card>
     <w-card title="趋势分析">
       <template #desc>
-        <view v-if="report?.trend_analysis">
+        <div v-if="report?.trend_analysis">
           {{ report.trend_analysis }}
-        </view>
-        <view v-else>暂无趋势分析</view>
+        </div>
+        <div v-else>暂无趋势分析</div>
       </template>
     </w-card>
-  </view>
+  </div>
 </template>

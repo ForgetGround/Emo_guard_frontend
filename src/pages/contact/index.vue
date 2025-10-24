@@ -18,10 +18,10 @@ function callPhone() {
 </script>
 
 <template>
-  <view class="contact-container">
+  <div class="contact-container">
     <wd-cell-group>
       <wd-cell title="客服电话" value="19858163283" is-link @click="callPhone" />
     </wd-cell-group>
     <wd-button block type="primary" @click="callPhone">一键拨打电话</wd-button>
-  </view>
+  </div>
 </template>

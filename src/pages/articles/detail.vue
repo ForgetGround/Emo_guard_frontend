@@ -68,19 +68,19 @@ function handleShare() {
 
 <template>
   <w-navbar title="文章详情" />
-  <view>
+  <div>
     <w-card v-if="article">
       <template #title>
-        <view>{{ article.title }}</view>
+        <div>{{ article.title }}</div>
       </template>
       <template #desc>
-        <view>{{ article.content }}</view>
+        <div>{{ article.content }}</div>
       </template>
       <template #extra>
-        <view>
-          <text>发布时间: {{ article.publish_time }}</text>
-          <text style="margin-left: 16rpx">状态: {{ article.status }}</text>
-        </view>
+        <div>
+          <span>发布时间: {{ article.publish_time }}</span>
+          <span style="margin-left: 16rpx">状态: {{ article.status }}</span>
+        </div>
       </template>
     </w-card>
     <w-button-group>
@@ -88,7 +88,7 @@ function handleShare() {
       <w-button type="warning" @click="handleCollect">收藏</w-button>
       <w-button type="info" @click="handleShare">分享</w-button>
     </w-button-group>
-  </view>
+  </div>
 </template>
 
 <!-- 禁止 SFC 内部 CSS，全部布局交由 wot-ui 组件完成 -->

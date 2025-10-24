@@ -25,15 +25,17 @@ const { data: reports, isLoading } = useQuery(
       <template #desc>
         <wot-loading v-if="isLoading" />
         <wot-empty v-else-if="!reports || reports.length === 0" description="暂无健康报告" />
-        <wd-list v-else>
-          <wd-list-item
+        <div v-else>
+          <div
             v-for="report in reports"
             :key="report.id"
-            :title="`报告类型: ${report.report_type}`"
-            :desc="`用户ID: ${report.user_id} 完成时间: ${report.created_at} 总体风险: ${report.overall_risk || '未知'}`"
-            :extra="report.summary"
-          />
-        </wd-list>
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">报告类型: {{ report.report_type }}</div>
+            <div>用户ID: {{ report.user_id }} 完成时间: {{ report.created_at }} 总体风险: {{ report.overall_risk || '未知' }}</div>
+            <div>{{ report.summary }}</div>
+          </div>
+        </div>
       </template>
     </wd-card>
   </wot-page>

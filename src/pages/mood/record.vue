@@ -58,84 +58,100 @@ onShow(() => {
 <template>
   <wot-page>
     <w-navbar title="心情记录" />
-    <w-card title="认知/情绪状态">
+    <WdCard title="认知/情绪状态">
       <template #desc>
         <wot-loading v-if="moodsLoading" />
-        <w-list v-else-if="latestMood">
-          <w-list-item
-            :title="latestMood.mood_name || '未命名'"
-            :desc="latestMood.text"
-            :extra="latestMood.record_date"
-          />
-        </w-list>
+        <div v-else-if="latestMood">
+          <div
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">
+              {{ latestMood.mood_name || '未命名' }}
+            </div>
+            <div>{{ latestMood.text }}</div>
+            <div>{{ latestMood.record_date }}</div>
+          </div>
+        </div>
         <wot-empty v-else description="暂无心情记录" />
       </template>
-    </w-card>
-    <w-card title="编辑日志" desc="记录今日心情">
+    </WdCard>
+    <WdCard title="编辑日志" desc="记录今日心情">
       <template #desc>
         <w-input v-model="moodText" placeholder="输入心情描述" />
         <w-slider v-model="moodScore" :min="0" :max="10" />
         <w-button type="primary" @click="submitMood">提交</w-button>
       </template>
-    </w-card>
-    <w-card title="心情变化">
+    </WdCard>
+    <WdCard title="心情变化">
       <template #desc>
         <wot-loading v-if="moodsLoading" />
         <wot-empty v-else-if="!moods || moods.length === 0" description="暂无心情日志" />
-        <w-list v-else>
-          <w-list-item
+        <div v-else>
+          <div
             v-for="item in moods"
             :key="item.id"
-            :title="item.mood_name || '未命名'"
-            :desc="item.mood_score"
-            :extra="item.record_date"
-          />
-        </w-list>
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">
+              {{ item.mood_name || '未命名' }}
+            </div>
+            <div>分数: {{ item.mood_score }}</div>
+            <div>{{ item.record_date }}</div>
+          </div>
+        </div>
       </template>
-    </w-card>
-    <w-card title="手环数据">
+    </WdCard>
+    <WdCard title="手环数据">
       <template #desc>
         <wot-loading v-if="reportsLoading" />
         <wot-empty v-else-if="!reports || reports.length === 0" description="暂无手环数据" />
-        <w-list v-else>
-          <w-list-item
+        <div v-else>
+          <div
             v-for="report in reports"
             :key="report.id"
-            :title="`报告类型:${report.report_type}`"
-            :desc="`摘要:${report.summary || ''}`"
-            :extra="report.created_at"
-          />
-        </w-list>
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">报告类型: {{ report.report_type }}</div>
+            <div>摘要: {{ report.summary || '' }}</div>
+            <div>{{ report.created_at }}</div>
+          </div>
+        </div>
       </template>
-    </w-card>
+    </WdCard>
     <!-- 历史数据查看 -->
-    <w-card title="历史数据">
+    <WdCard title="历史数据">
       <template #desc>
-        <w-list>
-          <w-list-item
+        <div>
+          <div
             v-for="item in moods || []"
             :key="item.id"
-            :title="item.mood_name || '未命名'"
-            :desc="item.text || ''"
-            :extra="item.record_date"
-          />
-          <w-list-item
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">
+              {{ item.mood_name || '未命名' }}
+            </div>
+            <div>{{ item.text || '' }}</div>
+            <div>{{ item.record_date }}</div>
+          </div>
+          <div
             v-for="report in reports || []"
             :key="report.id"
-            :title="`报告类型:${report.report_type}`"
-            :desc="`摘要:${report.summary || ''}`"
-            :extra="report.created_at"
-          />
-        </w-list>
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa"
+          >
+            <div style="font-weight: bold">报告类型: {{ report.report_type }}</div>
+            <div>摘要: {{ report.summary || '' }}</div>
+            <div>{{ report.created_at }}</div>
+          </div>
+        </div>
       </template>
-    </w-card>
+    </WdCard>
 
     <!-- 综合报告与趋势图（周/月/年） -->
-    <w-card title="综合报告与趋势图">
+    <WdCard title="综合报告与趋势图">
       <template #desc>
-        <view v-if="reportsLoading">加载中...</view>
+        <div v-if="reportsLoading">加载中...</div>
         <w-chart v-else :data="reports || []" type="line" />
       </template>
-    </w-card>
+    </WdCard>
   </wot-page>
 </template>

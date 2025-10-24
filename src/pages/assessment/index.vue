@@ -21,22 +21,24 @@ onShow(() => {
 
 <template>
   <wot-page>
-    <w-navbar title="心理测评" />
-    <w-card title="测评任务">
+    <WdNavbar title="心理测评" />
+    <WdCard title="测评任务">
       <template #desc>
         <wot-loading v-if="isLoading" />
         <wot-empty v-else-if="!results || results.length === 0" description="暂无测评任务" />
-        <w-list v-else>
-          <w-list-item
+        <div v-else>
+          <div
             v-for="item in results"
             :key="item.id"
-            :title="item.conclusion || '无结论'"
-            :desc="`状态: ${item.status}`"
-            :extra="item.created_at"
-          />
-        </w-list>
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa;"
+          >
+            <div style="font-weight: bold;">{{ item.conclusion || '无结论' }}</div>
+            <div>状态: {{ item.status }}</div>
+            <div>创建时间: {{ item.created_at }}</div>
+          </div>
+        </div>
       </template>
-    </w-card>
+    </WdCard>
   </wot-page>
 </template>
 

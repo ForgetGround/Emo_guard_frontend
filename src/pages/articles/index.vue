@@ -23,22 +23,24 @@ onShow(() => {
 
 <template>
   <wot-page>
-    <w-navbar title="健康科普" />
-    <w-card title="科普内容">
+    <WdNavbar title="健康科普" />
+    <WdCard title="科普内容">
       <template #desc>
         <wot-loading v-if="isLoading" />
         <wot-empty v-else-if="!articles || articles.length === 0" description="暂无科普内容" />
-        <w-list v-else>
-          <w-list-item
+        <div v-else>
+          <div
             v-for="item in articles"
             :key="item.id"
-            :title="item.title"
-            :desc="`状态: ${item.status}`"
-            :extra="item.publish_time"
-          />
-        </w-list>
+            style="margin-bottom: 16rpx; padding: 16rpx; border-radius: 8rpx; background: #f7f8fa;"
+          >
+            <div style="font-weight: bold;">{{ item.title }}</div>
+            <div>状态: {{ item.status }}</div>
+            <div>发布时间: {{ item.publish_time }}</div>
+          </div>
+        </div>
       </template>
-    </w-card>
+    </WdCard>
   </wot-page>
 </template>
 
